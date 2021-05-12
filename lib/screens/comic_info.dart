@@ -267,14 +267,16 @@ class ComicInfoScreen extends StatelessWidget {
                       ),
                     ),
                     if (state.comicCharacters.data()['characters'].isNotEmpty)
-                      SliverPadding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        sliver: SliverToBoxAdapter(
-                          child: CharaContainerDoc(
-                            doc: state.comicCharacters,
-                          ),
+                      SliverToBoxAdapter(
+                        child: CharaContainerDoc(
+                          doc: state.comicCharacters,
                         ),
                       ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10,
+                      ),
+                    ),
                     if (state.comicCreators.data()['Creators'].isNotEmpty)
                       SliverPadding(
                         padding: EdgeInsets.symmetric(
@@ -292,12 +294,9 @@ class ComicInfoScreen extends StatelessWidget {
                       ),
                     ),
                     if (state.comicCreators.data()['Creators'].isNotEmpty)
-                      SliverPadding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        sliver: SliverToBoxAdapter(
-                          child: CreatorContainerDoc(
-                            doc: state.comicCreators,
-                          ),
+                      SliverToBoxAdapter(
+                        child: CreatorContainerDoc(
+                          doc: state.comicCreators,
                         ),
                       ),
                   ],

@@ -201,11 +201,9 @@ class CharaContainerDoc extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Container(
-                        padding: EdgeInsets.all(9),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Flexible(
                           child: Text(
                             data[i]['name'].toUpperCase(),

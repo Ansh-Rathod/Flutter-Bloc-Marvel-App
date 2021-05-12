@@ -16,7 +16,7 @@ class CreatorContainerDoc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 290,
       child: ListView.builder(
           shrinkWrap: true,
           physics: BouncingScrollPhysics(),
@@ -72,16 +72,16 @@ class CreatorContainerDoc extends StatelessWidget {
                                 topRight: Radius.circular(10)),
                           ),
                           child: Container(
-                            height: 230,
+                            height: 200,
                             width: double.infinity,
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              height: 230,
+                              height: 200,
                               imageUrl:
                                   "${data[i]['thumbnail']['path']}.${data[i]['thumbnail']['extension']}",
                               placeholder: (context, url) => Container(
                                   color: Colors.grey,
-                                  height: 230,
+                                  height: 200,
                                   child: Center(
                                       child: CupertinoActivityIndicator())),
                               errorWidget: (context, url, error) =>

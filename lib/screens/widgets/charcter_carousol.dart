@@ -132,13 +132,13 @@ class CharaContainerDoc extends StatelessWidget {
     return Container(
       height: 370,
       child: ListView.builder(
-          shrinkWrap: true,
           physics: BouncingScrollPhysics(),
           itemCount: doc.data()['characters'].length,
           scrollDirection: Axis.horizontal,
           // store this controller in a State to save the carousel scroll position
           itemBuilder: (BuildContext context, int i) {
             final data = doc.data()['characters'];
+
             return InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -189,30 +189,48 @@ class CharaContainerDoc extends StatelessWidget {
                               imageUrl:
                                   "${data[i]['thumbnail']['path']}.${data[i]['thumbnail']['extension']}",
                               placeholder: (context, url) => Container(
-                                color: Colors.grey,
-                                height: 270,
-                                child: Center(
-                                  child: CupertinoActivityIndicator(),
-                                ),
-                              ),
+                                  color: Colors.grey,
+                                  height: 270,
+                                  child: Center(
+                                      child: CupertinoActivityIndicator())),
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.error),
                             ),
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Flexible(
-                          child: Text(
-                            data[i]['name'].toUpperCase(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        padding: EdgeInsets.all(9),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                data[i]['name'].toUpperCase(),
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(
+                              " ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            )
+                          ],
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          " ",
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      )
                     ],
                   ),
                 ),

@@ -145,7 +145,7 @@ class _AllCharactersState extends State<AllCharacters> {
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: Colors.grey[200],
+                                            color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(10),
                                                 bottomRight:

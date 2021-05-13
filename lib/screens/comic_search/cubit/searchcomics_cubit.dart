@@ -19,7 +19,13 @@ class SearchcomicsCubit extends Cubit<SearchcomicsState> {
       final response = await http.get(comicCreaters);
       final data = json.decode(response.body);
       final comics = data['data']['results'];
-      emit(state.copyWith(status: ComicStatus.success, comics: comics));
+      if (comics.isEmpty) {
+        emit(state.copyWith(
+          status: ComicStatus.notFound,
+        ));
+      } else {
+        emit(state.copyWith(status: ComicStatus.success, comics: comics));
+      }
     } catch (e) {
       emit(state.copyWith(status: ComicStatus.error));
     }

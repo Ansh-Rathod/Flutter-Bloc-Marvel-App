@@ -1,6 +1,6 @@
 part of 'searchcomics_cubit.dart';
 
-enum ComicStatus { loading, success, error, initial }
+enum ComicStatus { loading, success, error, initial, notFound }
 
 class SearchcomicsState extends Equatable {
   final ComicStatus status;
@@ -16,7 +16,7 @@ class SearchcomicsState extends Equatable {
     );
   }
   @override
-  List<Object> get props => [status, error];
+  List<Object> get props => [status, error, comics];
   @override
   bool get stringify => true;
 

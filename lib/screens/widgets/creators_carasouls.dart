@@ -16,14 +16,14 @@ class CreatorContainerDoc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 370,
+      height: 300,
       child: ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemCount: doc.data()['characters'].length,
+          itemCount: doc.data()['Creators'].length,
           scrollDirection: Axis.horizontal,
           // store this controller in a State to save the carousel scroll position
           itemBuilder: (BuildContext context, int i) {
-            final data = doc.data()['characters'];
+            final data = doc.data()['Creators'];
 
             return InkWell(
               onTap: () {
@@ -52,7 +52,7 @@ class CreatorContainerDoc extends StatelessWidget {
                   foregroundDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  width: 270,
+                  width: 220,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -67,16 +67,16 @@ class CreatorContainerDoc extends StatelessWidget {
                                 topRight: Radius.circular(10)),
                           ),
                           child: Container(
-                            height: 270,
+                            height: 220,
                             width: double.infinity,
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              height: 270,
+                              height: 220,
                               imageUrl:
                                   "${data[i]['thumbnail']['path']}.${data[i]['thumbnail']['extension']}",
                               placeholder: (context, url) => Container(
                                   color: Colors.grey,
-                                  height: 270,
+                                  height: 220,
                                   child: Center(
                                       child: CupertinoActivityIndicator())),
                               errorWidget: (context, url, error) =>

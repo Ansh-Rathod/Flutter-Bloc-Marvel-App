@@ -137,7 +137,7 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
                                           boxShadow: [
                                             BoxShadow(
                                               color: Colors.grey,
-                                              blurRadius: 2,
+                                              blurRadius: .7,
                                             ),
                                           ],
                                           color: Colors.grey,
@@ -149,7 +149,7 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: Colors.grey[200],
+                                            color: Colors.white,
                                             borderRadius: BorderRadius.only(
                                                 bottomLeft: Radius.circular(10),
                                                 bottomRight:

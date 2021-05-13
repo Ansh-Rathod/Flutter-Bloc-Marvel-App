@@ -11,42 +11,45 @@ class ComicSearchInputPage extends StatelessWidget {
     return BlocBuilder<SearchcomicsCubit, SearchcomicsState>(
         builder: (context, state) {
       return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: TextField(
-            autofocus: true,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[200],
-                hintText: "Search characters e.g. Iron-man",
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {},
-                ),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15))),
-            onSubmitted: (value) {
-              BlocProvider.of<SearchcomicsCubit>(context).onSubmitted(value);
-            },
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  hintText: "Search characters e.g. Iron-man",
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {},
+                  ),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(15))),
+              onSubmitted: (value) {
+                BlocProvider.of<SearchcomicsCubit>(context).onSubmitted(value);
+              },
+            ),
           ),
-        ),
-        body: state.status == ComicStatus.loading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : state.status == ComicStatus.success
-                ? GridComics(comics: state.comics)
-                : state.status == ComicStatus.error
-                    ? Center(child: Text("Comics Not found"))
-                    : state.comics == null
-                        ? Center(
-                            child: Text(
-                            "404\nComics Not found.",
-                            textAlign: TextAlign.center,
-                          ))
-                        : Container(),
-      );
+          body: state.status == ComicStatus.loading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : state.status == ComicStatus.success
+                  ? GridComics(comics: state.comics)
+                  : state.status == ComicStatus.error
+                      ? Center(child: Text("Comics Not found"))
+                      : state.status == ComicStatus.notFound
+                          ? Center(
+                              child: Text(
+                                "404\n No Comics found related to your serach.Please try specifc word of comic.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          : Container());
     });
   }
 }
@@ -106,7 +109,7 @@ class GridComics extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10))),

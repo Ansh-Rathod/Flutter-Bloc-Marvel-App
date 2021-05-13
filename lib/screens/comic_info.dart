@@ -12,6 +12,7 @@ class ComicInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BlocBuilder<ComicInfoBloc, ComicInfoState>(
         builder: (context, state) {
           if (state is ComicInfoLoading) {
@@ -45,7 +46,7 @@ class ComicInfoScreen extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
@@ -92,112 +93,97 @@ class ComicInfoScreen extends StatelessWidget {
                     ),
                     SliverPadding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40.0, vertical: 8.0),
+                          horizontal: 20.0, vertical: 8.0),
                       sliver: SliverToBoxAdapter(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Format:",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "${data['format']}",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Pages:",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "${data['pageCount']}",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            boxShadow: [
+                              BoxShadow(blurRadius: 1, color: Colors.grey),
+                            ],
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(.7),
+                              width: 0.5,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(.6),
-                                  shape: BoxShape.circle),
-                              width: 70,
-                              height: 70,
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      shape: BoxShape.circle),
-                                  width: 60,
-                                  height: 60,
-                                  alignment: Alignment.center,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "\$${state.comicInfo.data()['prices'][0]['price']}",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Format:",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "${data['format']}",
+                                    style: TextStyle(
                                         fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Pages:",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "${data['pageCount']}",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.red.withOpacity(.6),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                    width: 2,
+                                  ),
+                                ),
+                                width: 70,
+                                height: 70,
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle),
+                                    width: 60,
+                                    height: 60,
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "\$${state.comicInfo.data()['prices'][0]['price']}",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      sliver: SliverToBoxAdapter(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics()),
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  ...(data['urls'] as List)
-                                      .map((type) => Row(
-                                            children: [
-                                              RaisedButton(
-                                                  color: Colors.red,
-                                                  elevation: 0,
-                                                  textColor: Colors.white,
-                                                  onPressed: () async {
-                                                    await launch(type['url']);
-                                                  },
-                                                  child: Text(type['type']
-                                                      .toUpperCase())),
-                                              SizedBox(width: 20)
-                                            ],
-                                          ))
-                                      .toList(),
-                                ]),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -299,6 +285,51 @@ class ComicInfoScreen extends StatelessWidget {
                           doc: state.comicCreators,
                         ),
                       ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10,
+                      ),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 20),
+                      sliver: SliverToBoxAdapter(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ...(data['urls'] as List)
+                                      .map((type) => Row(
+                                            children: [
+                                              RaisedButton(
+                                                  color: Colors.red,
+                                                  elevation: 0,
+                                                  textColor: Colors.white,
+                                                  onPressed: () async {
+                                                    await launch(type['url']);
+                                                  },
+                                                  child: Text(type['type']
+                                                      .toUpperCase())),
+                                              SizedBox(width: 20)
+                                            ],
+                                          ))
+                                      .toList(),
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 20,
+                      ),
+                    ),
                   ],
                 ),
               ),

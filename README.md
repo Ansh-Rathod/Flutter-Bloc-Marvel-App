@@ -4,12 +4,12 @@ A new Flutter project with [Marvel Comics api](https://developer.marvel.com/).
 - An marvelapp is information about All Marvel Characters and comics.
 - i used flutter_bloc package for this app and firebase also to fetch Some prepages data.
 
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081746.jpg" width="400">
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081802.jpg" width="400">
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081820.jpg" width="400">
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081828.jpg" width="400">
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081843.jpg" width="400">
-<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081939.jpg" width="400">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081746.jpg" width="200">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081802.jpg" width="200">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081820.jpg" width="200">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081828.jpg" width="200">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081843.jpg" width="200">
+<img src="https://github.com/Appii00/flutter-bloc-marvelapp/blob/master/Screenshot_20210513-081939.jpg" width="200">
 
 ## Getting Started
 

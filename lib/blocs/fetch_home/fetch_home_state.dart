@@ -1,9 +1,10 @@
 part of 'fetch_home_bloc.dart';
 
-
 @immutable
 abstract class FetchHomeState {}
-class FectHomeInital extends FetchHomeState{}
+
+class FectHomeInital extends FetchHomeState {}
+
 class FetchHomeSucess extends FetchHomeState {
   final List characters;
   final List spidermanComics;
@@ -31,3 +32,5 @@ class FetchHomeError extends FetchHomeState {
 }
 
 class FetchHomeLoading extends FetchHomeState {}
+
+class FetchHomeNetWorkError extends FetchHomeState {}

@@ -4,6 +4,7 @@ import 'package:marvelapp/screens/image_grid.dart';
 import 'package:marvelapp/screens/image_view.dart';
 import 'package:marvelapp/screens/widgets/charcter_carousol.dart';
 import 'package:marvelapp/screens/widgets/creators_carasouls.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../blocs/comic_info/comic_info_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,7 +18,19 @@ class ComicInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is ComicInfoLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
             );
           } else if (state is ComicInfoSuccess) {
             final data = state.comicInfo.data();
@@ -35,7 +48,7 @@ class ComicInfoScreen extends StatelessWidget {
                       elevation: 0,
                       pinned: true,
                       title: Text(
-                        "#${state.comicInfo.data()['id']}",
+                        "About Comic",
                         style: TextStyle(
                           color: Colors.red,
                           fontSize: 20,
@@ -156,8 +169,8 @@ class ComicInfoScreen extends StatelessWidget {
                                     width: 2,
                                   ),
                                 ),
-                                width: 70,
-                                height: 70,
+                                width: 80,
+                                height: 80,
                                 alignment: Alignment.center,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -165,14 +178,13 @@ class ComicInfoScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         color: Colors.red,
                                         shape: BoxShape.circle),
-                                    width: 60,
-                                    height: 60,
+                                    width: 70,
+                                    height: 70,
                                     alignment: Alignment.center,
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        "\$${state.comicInfo.data()['prices'][0]['price']}",
-                                        overflow: TextOverflow.ellipsis,
+                                        "\$${state.comicInfo.data()['prices'][0]['price'].floor()}",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -193,44 +205,54 @@ class ComicInfoScreen extends StatelessWidget {
                         height: 10,
                       ),
                     ),
-                    SliverPadding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      sliver: SliverToBoxAdapter(
-                        child: Text("Images",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-                    SliverPadding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      sliver: SliverToBoxAdapter(
-                        child: PhotoGrid(
-                          imageUrls: data['images'],
-                          onImageClicked: (i) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ViewPhotos(
-                                          imageIndex: i,
-                                          imageList: data['images'],
-                                        )));
-                          },
-                          onExpandClicked: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ViewPhotos(
-                                          imageIndex: 3,
-                                          imageList: data['images'],
-                                        )));
-                          },
-                          maxImages: 4,
+                    if (data['images'].isNotEmpty)
+                      SliverPadding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        sliver: SliverToBoxAdapter(
+                          child: Text("Images",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
                         ),
                       ),
-                    ),
+                    if (data['images'].isNotEmpty)
+                      SliverPadding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        sliver: SliverToBoxAdapter(
+                          child: PhotoGrid(
+                            imageUrls: data['images'],
+                            onImageClicked: (i) {
+                              pushNewScreen(
+                                context,
+                                screen: ViewPhotos(
+                                  imageIndex: i,
+                                  imageList: data['images'],
+                                ),
+
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.slideUp,
+
+                                withNavBar: false, // OPTIONAL VALUE. True by
+                              );
+                            },
+                            onExpandClicked: () {
+                              pushNewScreen(
+                                context,
+                                screen: ViewPhotos(
+                                  imageIndex: 3,
+                                  imageList: data['images'],
+                                ),
+                                pageTransitionAnimation:
+                                    PageTransitionAnimation.slideUp,
+                                withNavBar: false, // OPTIONAL VALUE. True by
+                              );
+                            },
+                            maxImages: 4,
+                          ),
+                        ),
+                      ),
                     SliverToBoxAdapter(
                       child: SizedBox(
                         height: 10,
@@ -336,6 +358,55 @@ class ComicInfoScreen extends StatelessWidget {
             );
           } else if (state is ComicInfoError) {
             return Center(child: Text("Error"));
+          } else if (state is ComicInfoNetWorkError) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Please,Check your internet connection and",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Have another try?",
+                      style: TextStyle(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    RaisedButton(
+                      textColor: Colors.white,
+                      elevation: 0,
+                      color: Colors.red,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider<ComicInfoBloc>(
+                                create: (context) => ComicInfoBloc()
+                                  ..add(
+                                    ComicInfoLoad(state.uid),
+                                  ),
+                                child: ComicInfoScreen(),
+                              ),
+                            ));
+                      },
+                      child: Text("Try again"),
+                    )
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return Container();
           }
         },
       ),

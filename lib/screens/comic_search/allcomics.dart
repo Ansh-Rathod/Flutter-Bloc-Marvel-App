@@ -194,7 +194,21 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
               ],
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
+            );
           }
         },
       ),

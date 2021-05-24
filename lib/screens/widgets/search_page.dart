@@ -20,22 +20,29 @@ class _SearchPageState extends State<SearchPage> {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Search characters e.g. Iron-man",
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(15))),
-              onChanged: (value) {
-                BlocProvider.of<SearchPageCubit>(context).textChanged(value);
-              },
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: "Search characters e.g. Iron-man",
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(15))),
+                  onChanged: (value) {
+                    BlocProvider.of<SearchPageCubit>(context)
+                        .textChanged(value);
+                  },
+                ),
+              ),
             ),
           ),
           body: state.searchText != null
@@ -49,7 +56,21 @@ class _SearchPageState extends State<SearchPage> {
                     if (snapShot.hasError) {
                       return Center(child: Text("Failed"));
                     } else if (!snapShot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(height: 20),
+                            Text("Please wait till We fetch data..",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500))
+                          ],
+                        ),
+                      );
                     }
                     return ListView(
                       shrinkWrap: true,

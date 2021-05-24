@@ -21,9 +21,6 @@ class _BottomNavViewState extends State<BottomNavView> {
     ),
     AllCharacters(),
     ComicSearchPage(),
-    // Text(
-    //   'Profile',
-    // ),
   ];
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -45,17 +42,16 @@ class _BottomNavViewState extends State<BottomNavView> {
         activeColorPrimary: Colors.red,
         title: ("Comics"),
       ),
-      // PersistentBottomNavBarItem(
-      //   icon: Icon(Icons.local_activity),
-      //   inactiveColorPrimary: Colors.grey,
-      //   activeColorPrimary: Colors.red,
-      //   title: ("ProfileScreen"),
-      // ),
     ];
   }
 
   PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

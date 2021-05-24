@@ -16,4 +16,10 @@ class CharaInfoSuccess extends CharaInfoState {
   });
 }
 
+class CharaInfoNetWorkError extends CharaInfoState {
+  final int id;
+
+  CharaInfoNetWorkError({this.id});
+}
+
 class CharaInfoError extends CharaInfoState {}

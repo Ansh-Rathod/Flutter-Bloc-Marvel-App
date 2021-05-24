@@ -13,27 +13,46 @@ class ComicSearchInputPage extends StatelessWidget {
       return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                  hintText: "Search characters e.g. Iron-man",
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {},
-                  ),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(15))),
-              onSubmitted: (value) {
-                BlocProvider.of<SearchcomicsCubit>(context).onSubmitted(value);
-              },
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      hintText: "Search characters e.g. Iron-man",
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.search),
+                        onPressed: () {},
+                      ),
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(15))),
+                  onSubmitted: (value) {
+                    BlocProvider.of<SearchcomicsCubit>(context)
+                        .onSubmitted(value);
+                  },
+                ),
+              ),
             ),
           ),
           body: state.status == ComicStatus.loading
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                      Text("Please wait till We fetch data..",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold))
+                    ],
+                  ),
                 )
               : state.status == ComicStatus.success
                   ? GridComics(comics: state.comics)
@@ -46,7 +65,7 @@ class ComicSearchInputPage extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.w500),
                               ),
                             )
                           : Container());

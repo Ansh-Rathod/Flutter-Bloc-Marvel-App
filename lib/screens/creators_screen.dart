@@ -14,7 +14,19 @@ class CreatorsInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is CreatorInfoLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
             );
           } else if (state is CreatorInfoSuccess) {
             final data = state.creatorInfo.data();
@@ -129,7 +141,9 @@ class CreatorsInfoScreen extends StatelessWidget {
               ),
             );
           } else if (state is CreatorInfoError) {
-            return Center(child: Text("error"));
+            return Center(child: Text("Somthing Wents wrong😒"));
+          } else {
+            return Container();
           }
         },
       ),

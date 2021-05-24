@@ -17,7 +17,19 @@ class CharaInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is CharaInfoLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
             );
           } else if (state is CharaInfoSuccess) {
             final data = state.snapshot.data();
@@ -36,7 +48,7 @@ class CharaInfoScreen extends StatelessWidget {
                       backgroundColor: Colors.white,
                       iconTheme: IconThemeData(color: Colors.black),
                       title: Text(
-                        "#${state.snapshot.data()['id']}",
+                        "About Character",
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -141,6 +153,53 @@ class CharaInfoScreen extends StatelessWidget {
             );
           } else if (state is CharaInfoError) {
             return Center(child: Text("error"));
+          } else if (state is CharaInfoNetWorkError) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Please,Check your internet connection and",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Have another try?",
+                      style: TextStyle(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    RaisedButton(
+                      textColor: Colors.white,
+                      elevation: 0,
+                      color: Colors.red,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BlocProvider<CharaInfoBloc>(
+                                      create: (context) => CharaInfoBloc()
+                                        ..add(CharaInfoLoad(id: state.id)),
+                                      child: CharaInfoScreen(),
+                                    )));
+                      },
+                      child: Text("Try again"),
+                    )
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return Container();
           }
         },
       ),

@@ -13,21 +13,67 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Marvel",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+          centerTitle: true,
+          title: Text(
+            "Marvel",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.info_outline, color: Colors.red),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "About an App",
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                              "Marvel info. includes all comics,characters and creators information."),
+                          SizedBox(height: 10),
+                          Text("Made in Flutter platform."),
+                          SizedBox(height: 10),
+                          Text("Powered by Marvel API"),
+                        ],
+                      ),
+                      actions: [
+                        FlatButton(
+                          child: Text("Close"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+          )),
       body: BlocBuilder<FetchHomeBloc, FetchHomeState>(
         builder: (context, state) {
           if (state is FetchHomeLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
             );
           } else if (state is FetchHomeError) {
             return Center(
-              child: Text(state.error.msg),
+              child: Text("Something went wrong😒."),
             );
           } else if (state is FetchHomeSucess) {
             return CustomScrollView(
@@ -117,8 +163,54 @@ class Home extends StatelessWidget {
                 )),
               ],
             );
+          } else if (state is FetchHomeNetWorkError) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Please,Check your internet connection and",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      "Have another try?",
+                      style: TextStyle(
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    RaisedButton(
+                      textColor: Colors.white,
+                      elevation: 0,
+                      color: Colors.red,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) =>
+                                    FetchHomeBloc()..add(FecthLoadContent()),
+                                child: Home(),
+                              ),
+                            ));
+                      },
+                      child: Text("Try again"),
+                    )
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return Container();
           }
-          return Container();
         },
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -19,7 +20,7 @@ class AllCharacters extends StatefulWidget {
 
 class _AllCharactersState extends State<AllCharacters> {
   CharaBloc movieListBloc;
-
+  var connectivityResult;
   ScrollController controller = ScrollController();
   @override
   void initState() {
@@ -188,8 +189,23 @@ class _AllCharactersState extends State<AllCharacters> {
                 ),
               ],
             );
-          } else {
-            return Center(child: CircularProgressIndicator());
+          }
+          {
+            return Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 20),
+                  Text("Please wait till We fetch data..",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500))
+                ],
+              ),
+            );
           }
         },
       ),

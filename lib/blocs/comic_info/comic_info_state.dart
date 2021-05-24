@@ -18,4 +18,11 @@ class ComicInfoSuccess extends ComicInfoState {
   });
 }
 
+class ComicInfoNetWorkError extends ComicInfoState {
+  final int uid;
+  ComicInfoNetWorkError({
+    this.uid,
+  });
+}
+
 class ComicInfoError extends ComicInfoState {}

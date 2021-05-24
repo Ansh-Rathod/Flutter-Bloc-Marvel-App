@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:connectivity/connectivity.dart';
 import '../../models/failure.dart';
 import '../../repo/repo.dart';
 import 'package:meta/meta.dart';
@@ -18,13 +19,26 @@ class CharaInfoBloc extends Bloc<CharaInfoEvent, CharaInfoState> {
     if (event is CharaInfoLoad) {
       yield CharaInfoLoading();
       try {
-        final doc = await FirebaseFirestore.instance
-            .collection('Characters')
-            .doc(event.id.toString())
-            .get();
-        final comics = await repo.updateFirebase(event.id.toString());
+        var connectivityResult = await (Connectivity().checkConnectivity());
+        if (connectivityResult == ConnectivityResult.wifi) {
+          final doc = await FirebaseFirestore.instance
+              .collection('Characters')
+              .doc(event.id.toString())
+              .get();
+          final comics = await repo.updateFirebase(event.id.toString());
 
-        yield CharaInfoSuccess(snapshot: doc, comics: comics);
+          yield CharaInfoSuccess(snapshot: doc, comics: comics);
+        } else if (connectivityResult == ConnectivityResult.mobile) {
+          final doc = await FirebaseFirestore.instance
+              .collection('Characters')
+              .doc(event.id.toString())
+              .get();
+          final comics = await repo.updateFirebase(event.id.toString());
+
+          yield CharaInfoSuccess(snapshot: doc, comics: comics);
+        } else if (connectivityResult == ConnectivityResult.none) {
+          yield CharaInfoNetWorkError(id: event.id);
+        }
       } catch (e) {
         yield CharaInfoError();
       }

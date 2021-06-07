@@ -179,9 +179,10 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Container(
-                            height: 25,
-                            width: 25,
-                            child: CircularProgressIndicator(),
+                            child: SpinKitThreeBounce(
+                              color: Colors.red,
+                              size: 30.0,
+                            ),
                           ),
                         ),
                       ),
@@ -198,7 +199,7 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
             return Center(
                 child: SpinKitThreeBounce(
               color: Colors.red,
-              size: 50.0,
+              size: 30.0,
             ));
           }
         },

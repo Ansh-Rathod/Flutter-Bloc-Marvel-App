@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marvelapp/blocs/comic_info/comic_info_bloc.dart';
 import 'package:marvelapp/screens/comic_info.dart';
 import 'package:marvelapp/screens/comic_search/cubit/searchcomics_cubit.dart';
@@ -44,7 +45,10 @@ class ComicSearchInputPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(),
+                      SpinKitThreeBounce(
+                        color: Colors.red,
+                        size: 30.0,
+                      ),
                       SizedBox(height: 20),
                       Text("Please wait till We fetch data..",
                           style: TextStyle(

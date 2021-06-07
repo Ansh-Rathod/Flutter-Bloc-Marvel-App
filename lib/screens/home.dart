@@ -187,10 +187,13 @@ class Home extends StatelessWidget {
             color: Colors.black, fontSize: 12, fontWeight: FontWeight.bold),
       ),
       actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-          child:
-              Icon(Icons.arrow_right_alt_outlined, size: 35, color: Colors.red),
+        InkWell(
+          onTap: ontap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Icon(Icons.arrow_right_alt_outlined,
+                size: 35, color: Colors.red),
+          ),
         ),
       ],
     );

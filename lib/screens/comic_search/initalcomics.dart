@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:marvelapp/blocs/comic_info/comic_info_bloc.dart';
 import 'package:marvelapp/screens/comic_info.dart';
 import 'package:marvelapp/screens/comic_search/cubit/searchcomics_cubit.dart';
@@ -19,7 +20,10 @@ class InitalComics extends StatelessWidget {
         ),
         body: state.status == ComicStatus.loading
             ? Center(
-                child: CircularProgressIndicator(),
+                child: SpinKitThreeBounce(
+                  color: Colors.red,
+                  size: 50.0,
+                ),
               )
             : state.status == ComicStatus.success
                 ? GridComics(comics: state.comics)

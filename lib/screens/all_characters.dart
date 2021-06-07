@@ -177,7 +177,10 @@ class _AllCharactersState extends State<AllCharacters> {
                           child: Container(
                             height: 25,
                             width: 25,
-                            child: CircularProgressIndicator(),
+                            child: SpinKitThreeBounce(
+                              color: Colors.red,
+                              size: 30.0,
+                            ),
                           ),
                         ),
                       ),

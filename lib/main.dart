@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         textTheme: GoogleFonts.montserratTextTheme(),
         primaryColor: Colors.red,
         accentColor: Colors.red,

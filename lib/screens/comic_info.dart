@@ -102,7 +102,7 @@ class ComicInfoScreen extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.grey[100],
+                            color: Colors.white,
                             boxShadow: [
                               BoxShadow(blurRadius: 1, color: Colors.grey),
                             ],

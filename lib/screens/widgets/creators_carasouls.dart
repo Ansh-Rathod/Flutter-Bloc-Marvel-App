@@ -46,7 +46,7 @@ class CreatorContainerDoc extends StatelessWidget {
                           blurRadius: .7,
                         ),
                       ],
-                      color: Colors.grey[100],
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.all(8),
                   foregroundDecoration: BoxDecoration(

@@ -14,6 +14,7 @@ import 'package:marvelapp/screens/comic_search/comics_search.dart';
 import 'package:marvelapp/screens/comic_search/cubit/searchcomics_cubit.dart';
 import 'package:marvelapp/screens/cubits/searchCubit/search_page_cubit.dart';
 import 'package:marvelapp/screens/widgets/search_page.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ComicSearchPage extends StatefulWidget {
   ComicSearchPage({Key key}) : super(key: key);
@@ -195,20 +196,10 @@ class _ComicSearchPageState extends State<ComicSearchPage> {
             );
           } else {
             return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  Text("Please wait till We fetch data..",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
-            );
+                child: SpinKitThreeBounce(
+              color: Colors.red,
+              size: 50.0,
+            ));
           }
         },
       ),

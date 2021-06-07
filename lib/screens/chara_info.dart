@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../blocs/charaters_bloc/chara_info_bloc.dart';
 import 'widgets/comics_caurosol.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:html/parser.dart';
 
@@ -17,20 +19,10 @@ class CharaInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is CharaInfoLoading) {
             return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  Text("Please wait till We fetch data..",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
-            );
+                child: SpinKitThreeBounce(
+              color: Colors.red,
+              size: 50.0,
+            ));
           } else if (state is CharaInfoSuccess) {
             final data = state.snapshot.data();
 
@@ -168,14 +160,7 @@ class CharaInfoScreen extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Have another try?",
-                      style: TextStyle(
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
+                    Container(),
                     SizedBox(height: 10),
                     RaisedButton(
                       textColor: Colors.white,

@@ -8,6 +8,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../blocs/comic_info/comic_info_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ComicInfoScreen extends StatelessWidget {
   @override
@@ -18,20 +19,10 @@ class ComicInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is ComicInfoLoading) {
             return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  Text("Please wait till We fetch data..",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
-            );
+                child: SpinKitThreeBounce(
+              color: Colors.red,
+              size: 50.0,
+            ));
           } else if (state is ComicInfoSuccess) {
             final data = state.comicInfo.data();
             return Center(
@@ -373,14 +364,7 @@ class ComicInfoScreen extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Have another try?",
-                      style: TextStyle(
-                        // fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
+                    Container(),
                     SizedBox(height: 10),
                     RaisedButton(
                       textColor: Colors.white,

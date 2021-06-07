@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:marvelapp/screens/widgets/comics_caurosol.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CreatorsInfoScreen extends StatelessWidget {
   @override
@@ -14,20 +15,10 @@ class CreatorsInfoScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is CreatorInfoLoading) {
             return Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  Text("Please wait till We fetch data..",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
-            );
+                child: SpinKitThreeBounce(
+              color: Colors.red,
+              size: 50.0,
+            ));
           } else if (state is CreatorInfoSuccess) {
             final data = state.creatorInfo.data();
 

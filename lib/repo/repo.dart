@@ -35,7 +35,7 @@ class GetData {
 
   Future<DocumentSnapshot> updateFirebase(String id) async {
     var comicsUrl = Uri.parse(
-        'https://gateway.marvel.com/v1/public/characters/${id.toString()}/comics?ts=1&apikey=&hash=fcbd875beb64e407e41ea8088ed2cd0c');
+        'https://gateway.marvel.com/v1/public/characters/${id.toString()}/comics?ts=1&apikey=690e3ac16286c2de4591eca37269eedb&hash=fcbd875beb64e407e41ea8088ed2cd0c');
 
     try {
       await FirebaseFirestore.instance
@@ -60,7 +60,7 @@ class GetData {
   Future<DocumentSnapshot<Map<String, dynamic>>> updatecomicFirebase(
       String id) async {
     var comicsUrl = Uri.parse(
-        'https://gateway.marvel.com/v1/public/comics/$id?ts=1&apikey=&hash=fcbd875beb64e407e41ea8088ed2cd0c');
+        'https://gateway.marvel.com/v1/public/comics/$id?ts=1&apikey=690e3ac16286c2de4591eca37269eedb&hash=fcbd875beb64e407e41ea8088ed2cd0c');
     try {
       await FirebaseFirestore.instance
           .collection('ComicsById')
@@ -85,7 +85,7 @@ class GetData {
 
   Future<DocumentSnapshot> updatecomicCreatorsFirebase(String id) async {
     var comicCreaters = Uri.parse(
-        'https://gateway.marvel.com/v1/public/comics/$id/creators?ts=1&apikey=&hash=fcbd875beb64e407e41ea8088ed2cd0c');
+        'https://gateway.marvel.com/v1/public/comics/$id/creators?ts=1&apikey=690e3ac16286c2de4591eca37269eedb&hash=fcbd875beb64e407e41ea8088ed2cd0c');
     try {
       await FirebaseFirestore.instance
           .collection('ComicCreators')
@@ -110,7 +110,7 @@ class GetData {
 
   Future<DocumentSnapshot> updatecomicCharactersFirebase(String id) async {
     var comicCreaters = Uri.parse(
-        'https://gateway.marvel.com/v1/public/comics/$id/characters?ts=1&apikey=&hash=fcbd875beb64e407e41ea8088ed2cd0c&limit=100');
+        'https://gateway.marvel.com/v1/public/comics/$id/characters?ts=1&apikey=690e3ac16286c2de4591eca37269eedb&hash=fcbd875beb64e407e41ea8088ed2cd0c&limit=100');
     try {
       await FirebaseFirestore.instance
           .collection('ComicCharacters')
@@ -136,7 +136,7 @@ class GetData {
   Future<DocumentSnapshot<Map<String, dynamic>>> updateCreatorsFirebase(
       String id) async {
     var comicsUrl = Uri.parse(
-        'https://gateway.marvel.com/v1/public/creators/$id?ts=1&apikey=&hash=fcbd875beb64e407e41ea8088ed2cd0c');
+        'https://gateway.marvel.com/v1/public/creators/$id?ts=1&apikey=690e3ac16286c2de4591eca37269eedb&hash=fcbd875beb64e407e41ea8088ed2cd0c');
     try {
       await FirebaseFirestore.instance
           .collection('CratorsById')

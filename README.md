@@ -28,12 +28,12 @@ A new Flutter project with [Marvel Comics api](https://developer.marvel.com/).
 
 <br>
 <p align="center">
-<img src="screenshots\Screenshot_20210607-165128.jpg" width="30%">
-<img src="screenshots\Screenshot_20210607-170002.jpg" width="30%">
-<img src="screenshots\Screenshot_20210607-170018.jpg" width="30%">
-<img src="screenshots\Screenshot_20210607-170030.jpg" width="30%">
-<img src="screenshots\Screenshot_20210607-170057.jpg" width="30%">
-<img src="screenshots\Screenshot_20210607-170108.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-165128.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-170002.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-170018.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-170030.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-170057.jpg" width="30%">
+<img src="screenshots/Screenshot_20210607-170108.jpg" width="30%">
 </p>
 
 ## How to use
